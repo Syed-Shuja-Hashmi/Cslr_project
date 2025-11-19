@@ -1,16 +1,104 @@
 # CSLR_project
-# OSINT Virtual Machine -- Debian 13 (AwesomeWM + Zsh)
+# OSINT Virtual Machine -- Debian 13 (AwesomeWM + Oh-My-Zsh)
 
-This repository contains the full source code, installer, and
-documentation for a **custom Debian-13 based OSINT machine** using
-**AwesomeWM**, **oh-my-zsh**, and a hardened privacy-focused browser
-environment.
+This repository contains the full source code, installer, documentation,
+and environment configuration for a **custom Debian 13 OSINT machine**
+built with:
+
+-   **AwesomeWM (window manager)**
+-   **Oh-My-Zsh (Zsh framework)**
+-   **Custom OSINT tools installer**
+-   **Hardened Firefox ESR**
+-   **Full CLI/GUI toolset for OSINT investigations**
 
 ------------------------------------------------------------------------
 
-## 📦 Included Tools
+# 🖥️ Desktop Environment Setup
 
-Installed by the script:
+This OSINT VM uses a lightweight and highly customizable environment
+based on **AwesomeWM** and **Oh-My-Zsh**.
+
+Below are the exact installation steps.
+
+------------------------------------------------------------------------
+
+## 🚀 Install AwesomeWM (Debian 13)
+
+Run:
+
+    sudo apt update
+    sudo apt install -y awesome awesome-extra
+
+Enable it in your display manager (LightDM/GDM/Slim):
+
+    sudo systemctl restart lightdm
+
+If you use `.xinitrc`:
+
+    echo "exec awesome" > ~/.xinitrc
+    startx
+
+------------------------------------------------------------------------
+
+## 🎨 Recommended AwesomeWM Addons
+
+Install common utilities:
+
+    sudo apt install -y rofi feh picom xterm lxappearance
+
+Optional themes directory:
+
+    mkdir -p ~/.config/awesome/themes
+
+Reload Awesome:
+
+    super + ctrl + r
+
+------------------------------------------------------------------------
+
+# 💻 Install Oh-My-Zsh
+
+Install Zsh:
+
+    sudo apt install -y zsh
+
+Make Zsh your default shell:
+
+    chsh -s /usr/bin/zsh
+
+Log out & log back in.
+
+------------------------------------------------------------------------
+
+## ⚡ Install Oh-My-Zsh
+
+Run:
+
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+------------------------------------------------------------------------
+
+## 🔌 Recommended Oh-My-Zsh Plugins
+
+Edit `~/.zshrc`:
+
+    plugins=(
+      git
+      z
+      fzf
+      colored-man-pages
+      sudo
+    )
+
+Reload:
+
+    source ~/.zshrc
+
+------------------------------------------------------------------------
+
+# 🧰 OSINT Tooling (Installed via Script)
+
+Tools installed automatically:
 
 -   **Sherlock**
 -   **Shodan CLI**
@@ -23,17 +111,16 @@ Installed by the script:
 -   **Exiftool**
 -   **Steghide / Stegseek**
 -   **translate-shell**
--   **Firefox ESR hardened with enterprise policies**
--   **Updater utility + GUI launcher**
+-   **Hardened Firefox ESR**
+-   **Custom updater (CLI + desktop launcher)**
 
 ------------------------------------------------------------------------
 
-## 📁 Repository Structure
+# 📁 Repository Structure
 
     setup/
-       osint-install.sh     # full installer
+       osint-install.sh
     scripts/
-       (empty – reserved for future automation)
     examples/
        sample_targets.txt
        sample_output/
@@ -47,14 +134,9 @@ Installed by the script:
 
 ------------------------------------------------------------------------
 
-## 🛠 Installation (Debian 13)
-
-Make script executable:
+# 🛠 Installation
 
     chmod +x setup/osint-install.sh
-
-Run:
-
     sudo ./setup/osint-install.sh
 
 To validate only:
@@ -63,36 +145,28 @@ To validate only:
 
 ------------------------------------------------------------------------
 
-## ▶️ Usage After Installation
+# ▶️ Usage Examples
 
-### **Run SpiderFoot UI**
-
-    spiderfoot -l 127.0.0.1:5001
-
-Then open Firefox → *SpiderFoot (local)* bookmark.
-
-### **Shodan**
+### Shodan CLI
 
     shodan init YOUR_API_KEY
-    shodan host 8.8.8.8
+    shodan host 1.1.1.1
 
-### **Sherlock**
+### Sherlock
 
     sherlock username
 
-### **PhoneInfoga**
+### PhoneInfoga
 
     phoneinfoga scan -n "+12025550142"
 
+### SpiderFoot
+
+    spiderfoot -l 127.0.0.1:5001
+
 ------------------------------------------------------------------------
 
-## 🧪 Example Dataset (sample_targets.txt)
-
-Located in:
-
-    examples/sample_targets.txt
-
-Content:
+# 🧪 Example Dataset
 
     example.com
     github.com
@@ -100,49 +174,23 @@ Content:
 
 ------------------------------------------------------------------------
 
-## ♻️ Reproduce Results
+# ♻️ Reproducing Results
 
-1.  Install using `osint-install.sh`
-2.  Add targets to: `examples/sample_targets.txt`
-3.  Run any tool:
-
-```{=html}
-<!-- -->
-```
-    sherlock johndoe
-    shodan domain example.com
-    phoneinfoga scan ...
-
-4.  Save your outputs into:
-
-```{=html}
-<!-- -->
-```
-    examples/sample_output/
+1.  Install VM using the script\
+2.  Add targets to `examples/sample_targets.txt`\
+3.  Run OSINT tools\
+4.  Export results into `examples/sample_output/`
 
 ------------------------------------------------------------------------
 
-## ⚖️ Legal and Ethical Standards
-
-This OSINT machine follows strict **non-intrusive**, **legally
-compliant**, and **privacy-respecting** rules.
+# ⚖️ Legal & Ethical Compliance
 
 See:
 
 -   `legal/ETHICS.md`
 -   `legal/LEGAL_COMPLIANCE.md`
 
-------------------------------------------------------------------------
+This OSINT VM only performs **legal**, **non-intrusive**,
+**public-data** reconnaissance.
 
-## 📝 Dependencies
-
-All dependencies are installed automatically:
-
--   Python3 + pipx\
--   Go\
--   Rust (cargo)\
--   Node + npm\
--   Java (OpenJDK 11)\
--   Firefox ESR\
--   Tor
 
