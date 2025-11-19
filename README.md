@@ -146,12 +146,3 @@ All dependencies are installed automatically:
 -   Firefox ESR\
 -   Tor
 
-------------------------------------------------------------------------
-
-# ✔ Complies with University Requirements
-
-✔ Full source code (installer)\
-✔ Clear installation & usage instructions\
-✔ Example dataset + reproducible workflow\
-✔ README with dependencies + structure\
-✔ Legal & Ethical compliance section
